@@ -2,10 +2,12 @@
   (:use compojure.core 
         ring.adapter.jetty)
   (:require [compojure.handler :as handler]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            [flukso-to-cosm.fetcher :as fetcher])
+  )
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] (fetcher/get-data))
   (GET "/hi/:name" [name] (str "<p>Hi " name))
   (route/not-found "Not Found"))
 
